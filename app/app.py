@@ -77,7 +77,7 @@ else:
     
 # Customize the layout
 fig.update_traces(texttemplate='%{text:.2s}', textposition='outside')
-fig.update_layout(showlegend=False, xaxis=dict(showticklabels=False, title=None),)
+fig.update_layout(showlegend=False, xaxis=dict(showticklabels=False, title=None),yaxis=dict(autorange='reversed'))
 
 # Display the plot using Plotly
 st.plotly_chart(fig)
