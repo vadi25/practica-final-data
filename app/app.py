@@ -6,7 +6,7 @@ import plotly.express as px
 
 
 # Load the merged skills data from the CSV file
-merged_skills_df = pd.read_csv('data/merged_skills_data.csv')
+merged_skills_df = pd.read_csv('../data/merged_skills_data.csv')
 
 # Set background color and pastel colors
 st.markdown(

@@ -1,0 +1,11 @@
+version: '3'
+services:
+  myapp:
+    build:
+      context: app/
+    container_name: app_container
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./app:/app
+      - ./data:/data
