@@ -6,6 +6,7 @@ services:
     container_name: app_container
     ports:
       - "8501:8501"
+    command: ["streamlit", "run", "--server.address", "0.0.0.0", "app.py"]
     volumes:
       - ./app:/app
       - ./data:/data

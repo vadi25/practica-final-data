@@ -16,4 +16,4 @@ COPY . /app
 EXPOSE 8501
 
 # Command to run the application
-CMD ["streamlit", "run", "app.py"]
+CMD ["streamlit", "run", "--server.address", "0.0.0.0", "app.py"]
