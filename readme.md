@@ -8,7 +8,7 @@ cd practica-final-data
 
 ### Ejecuta la aplicación con Docker Compose:
 docker-compose up --build
-La aplicación estará disponible en * http://localhost:8501 * en tu navegador.
+La aplicación estará disponible en *http://localhost:8501* en tu navegador.
 
 ## Requisitos
 No es necesario instalar dependencias manualmente, ya que el contenedor de Docker incluye todas las bibliotecas necesarias.
