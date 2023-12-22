@@ -5,8 +5,8 @@ import seaborn as sns
 import plotly.express as px
 
 # Load the data from the CSV file
-merged_skills_df = pd.read_csv('../data/merged_skills_data.csv')
-job_titles_df = pd.read_csv('../data/merged_titles_data.csv')
+merged_skills_df = pd.read_csv('data/merged_skills_data.csv')
+job_titles_df = pd.read_csv('data/merged_titles_data.csv')
 
 # Set background color and pastel colors
 st.markdown(
