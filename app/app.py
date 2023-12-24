@@ -3,10 +3,40 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
+import requests
 
-# Load the data from the CSV file
-merged_skills_df = pd.read_csv('../data/merged_skills_data.csv')
-job_titles_df = pd.read_csv('../data/merged_titles_data.csv')
+@st.cache_data
+def load_data_s():
+    response_s = requests.get('http://server:3000/get_skills')
+
+    try:
+        response_s.raise_for_status()
+        data_s = response_s.json()
+        data_s_df = pd.DataFrame(data_s)
+        return data_s_df
+    except requests.RequestException as e:
+        st.error(f"Failed to retrieve data. Error: {e}")
+    except ValueError as e:
+        st.error(f"Failed to parse JSON. Error: {e}")
+
+@st.cache_data
+def load_data_t():
+    response_t = requests.get('http://server:3000/get_titles')
+    try:
+        response_t.raise_for_status()
+        data_t = response_t.json()
+        data_t_df = pd.DataFrame(data_t)
+        return data_t_df
+        
+    except requests.RequestException as e:
+        st.error(f"Failed to retrieve data. Error: {e}")
+    except ValueError as e:
+        st.error(f"Failed to parse JSON. Error: {e}")
+
+
+# Load the data from the API
+merged_skills_df = load_data_s()
+job_titles_df = load_data_t()
 
 # Set background color and pastel colors
 st.markdown(

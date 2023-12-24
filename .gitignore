@@ -1,3 +1,4 @@
 .DS_Store
 data/gsearch_jobs.csv
 data/merged_skills_data.db
+server/__pycache__
