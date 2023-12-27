@@ -2,3 +2,4 @@
 data/gsearch_jobs.csv
 data/merged_skills_data.db
 server/__pycache__
+data/merged_titles_data.db
