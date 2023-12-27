@@ -4,38 +4,32 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 import requests
+import sqlalchemy as db
+from sqlalchemy import create_engine
+from sqlalchemy import *
 
-@st.cache_data
-def load_data_s():
 
-    # Make a GET request to the FastAPI endpoint
-    response_s = requests.get('http://0.0.0.0:3000/get_skills')
-
+def get_titles():
+    engine = create_engine('sqlite:///data/merged_titles_data.db')
+    conn = engine.connect()
+    metadata = db.MetaData()
+    Skills = Table('title', metadata, autoload_with=engine)
+    query = db.select(Skills)
+    res= conn.execute(query)
     try:
-        response_s.raise_for_status()
-        data_s = response_s.json()
-        st.success("Data retrieved successfully!")
-        st.write(data_s)
-    except requests.RequestException as e:
-        st.error(f"Failed to retrieve data. Error: {e}")
-    except ValueError as e:
-        st.error(f"Failed to parse JSON. Error: {e}")
+        skills_df = pd.read_sql(query, conn)
+        skills_df.head()
+        keys=Skills.columns.keys()
+        skills_df.columns = keys
+        if skills_df.empty:
+            return print("Error")
+        elif skills_df is None:
+            return print("Error")
+        elif skills_df is not None:
+            json_data=skills_df.to_dict(orient='records')
+            return json_data
+    except:
+       return print("Error")
 
-@st.cache_data
-def load_data_t(url_t:str):
-    response_t = requests.get(url_t)
-    if response_t.status_code == 200:
-        st.write(response_t.json())
-        '''        json_titles = response_t.json()
-        job_titles_df = pd.DataFrame(json_titles)
-        st.write(job_titles_df)
-        '''
-    else:
-        st.error(f"Failed to retrieve CSV data. Status Code: {response_t.status_code}")
+print(get_titles())
 
-
-
-# load_data_t('http://0.0.0.0:3000/get_titles')
-
-if st.button('Button'):
-    load_data_s()
